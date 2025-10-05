@@ -4,6 +4,7 @@ Nowoczesna wersja klasycznej gry w Wojnę z zaawansowanymi mechanikami, power-up
 
 ## 🎯 Funkcje
 
+- 📱 **Progressive Web App (PWA)** - można zainstalować na telefonie i komputerze!
 - ⚔️ **Klasyczna gra w Wojnę** z nowoczesnymi mechanikami
 - 🎨 **Piękny interfejs** z animacjami i efektami cząsteczkiwymi
 - 🔥 **System Rage** - wściekłość zwiększa szansę na critical hit
@@ -77,6 +78,20 @@ Komenda automatycznie:
    - W sekcji "Source" wybierz branch `gh-pages`
    - Kliknij Save
    - Po chwili Twoja gra będzie dostępna pod adresem: `https://TwojaNazwa.github.io/War4Ever/`
+
+## 📱 Instalacja aplikacji (PWA)
+
+### Na telefonie (Android/iOS):
+1. Otwórz grę w przeglądarce (Chrome, Safari, Firefox)
+2. Kliknij menu przeglądarki (⋮ lub 􀅴)
+3. Wybierz **"Dodaj do ekranu głównego"** lub **"Zainstaluj aplikację"**
+4. Gra będzie dostępna jak zwykła aplikacja!
+
+### Na komputerze (Chrome, Edge):
+1. Otwórz grę w przeglądarce
+2. Kliknij ikonę instalacji (⊕) w pasku adresu
+3. Lub menu → "Zainstaluj WOJNA 3.0"
+4. Gra będzie działać w osobnym oknie!
 
 ## 🎮 Jak grać
 

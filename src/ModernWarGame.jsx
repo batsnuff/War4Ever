@@ -54,11 +54,39 @@ const ModernWarGame = () => {
   const [tacticsMode, setTacticsMode] = useState(null); // Tryb taktyczny
   const [cardSynergy, setCardSynergy] = useState(0); // Synergia kart
   const [seasonalEvent, setSeasonalEvent] = useState(null);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
 
   const suits = ['♥', '♦', '♣', '♠'];
   const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
   const elements = ['🔥', '💧', '🌿', '⚡', '🌙'];
   const weathers = ['☀️ Słonecznie', '🌧️ Deszcz', '❄️ Śnieg', '🌪️ Burza', '🌈 Tęcza'];
+  
+  // PWA Install Handler
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallButton(true);
+    };
+    
+    window.addEventListener('beforeinstallprompt', handler);
+    
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    if (outcome === 'accepted') {
+      setShowInstallButton(false);
+    }
+    
+    setDeferredPrompt(null);
+  };
   
   const getCardValue = (card) => {
     let baseValue = values.indexOf(card.value);
@@ -704,7 +732,7 @@ const ModernWarGame = () => {
 
         {/* Enhanced Stats Bar */}
         <div className="grid grid-cols-2 md:flex md:justify-between items-center gap-3 md:gap-4 mb-6">
-          <div className="bg-blue-500/30 backdrop-blur-md rounded-2xl p-3 md:p-4 border-2 border-blue-400 col-span-1">
+          <div className="bg-blue-500/20 backdrop-blur-md rounded-2xl p-3 md:p-4 border-2 border-blue-400 col-span-1 transition-all duration-300">
             <p className="text-white text-xs md:text-sm mb-1">TY {emotionState === 'confident' ? '😎' : emotionState === 'desperate' ? '😰' : '🎮'}</p>
             <p className="text-2xl md:text-4xl font-bold text-white">{playerScore}</p>
             <div className="flex gap-1 mt-2">
@@ -795,7 +823,7 @@ const ModernWarGame = () => {
             </div>
           )}
           
-          <div className="bg-red-500/30 backdrop-blur-md rounded-2xl p-3 md:p-4 border-2 border-red-400 col-span-1">
+          <div className="bg-red-500/20 backdrop-blur-md rounded-2xl p-3 md:p-4 border-2 border-red-400 col-span-1 transition-all duration-300">
             <p className="text-white text-xs md:text-sm mb-1">AI {emotionState === 'confident' ? '😈' : emotionState === 'desperate' ? '😱' : '🤖'}</p>
             <p className="text-2xl md:text-4xl font-bold text-white">{opponentScore}</p>
             <div className="flex gap-1 mt-2">
@@ -966,12 +994,22 @@ const ModernWarGame = () => {
         {/* Controls */}
         <div className="mt-6 md:mt-8 flex flex-col md:flex-row justify-center gap-3 md:gap-4" onClick={(e) => e.stopPropagation()}>
           {!gameStarted ? (
-            <button
-              onClick={startGame}
-              className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 md:py-4 px-8 md:px-12 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-200 text-lg md:text-xl border-2 border-green-400"
-            >
-              🎮 ROZPOCZNIJ EPICKĄ PRZYGODĘ
-            </button>
+            <>
+              <button
+                onClick={startGame}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 md:py-4 px-8 md:px-12 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-200 text-lg md:text-xl border-2 border-green-400"
+              >
+                🎮 ROZPOCZNIJ EPICKĄ PRZYGODĘ
+              </button>
+              {showInstallButton && (
+                <button
+                  onClick={handleInstallClick}
+                  className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold py-3 md:py-4 px-6 md:px-10 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-200 text-base md:text-lg border-2 border-purple-400 animate-pulse"
+                >
+                  📱 ZAINSTALUJ APLIKACJĘ
+                </button>
+              )}
+            </>
           ) : (
             <button
               onClick={startGame}

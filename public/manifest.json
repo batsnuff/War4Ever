@@ -1,0 +1,29 @@
+{
+  "name": "WOJNA 3.0 - Epicka Gra Karciana",
+  "short_name": "WOJNA 3.0",
+  "description": "Nowoczesna wersja klasycznej gry w Wojnę z zaawansowanymi mechanikami i power-upami!",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1e1b4b",
+  "theme_color": "#6366f1",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "entertainment"],
+  "lang": "pl",
+  "dir": "ltr"
+}
+
