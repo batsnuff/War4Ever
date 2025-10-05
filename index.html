@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/War4Ever/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WOJNA 3.0 - Epicka Gra Karciana</title>
+    <meta name="description" content="Nowoczesna wersja klasycznej gry w Wojnę z zaawansowanymi mechanikami, power-upami i efektami specjalnymi!" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="WOJNA 3.0" />
+    <link rel="manifest" href="/War4Ever/manifest.json" />
+    <link rel="apple-touch-icon" href="/War4Ever/icon-192.svg" />
+    <script type="module" crossorigin src="/War4Ever/assets/main-5db6ec65.js"></script>
+    <link rel="stylesheet" href="/War4Ever/assets/index-fcb320b4.css">
+  </head>
+  <body style="margin: 0; padding: 0; overflow-x: hidden;">
+    <div id="root"></div>
+    
+    
+    <!-- Register Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered:', registration);
+            })
+            .catch((error) => {
+              console.log('SW registration failed:', error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
+
